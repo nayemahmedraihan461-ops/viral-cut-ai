@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Viral Cut AI - Video Clip Generator</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #0b1020;
+  color: white;
+  min-height: 100vh;
+}
+
+header {
+  padding: 20px;
+  border-bottom: 1px solid #273047;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+  color: #8b7cff;
+}
+
+.logo span {
+  color: white;
+}
+
+.tag {
+  background: #202947;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: #a99cff;
+}
+
+main {
+  max-width: 750px;
+  margin: auto;
+  padding: 35px 18px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.hero h1 {
+  font-size: 34px;
+  margin-bottom: 13px;
+}
+
+.hero h1 span {
+  color: #9382ff;
+}
+
+.hero p {
+  color: #aab2c8;
+  line-height: 1.6;
+}
+
+.card {
+  background: #151d33;
+  border: 1px solid #293553;
+  border-radius: 17px;
+  padding: 22px;
+  margin-bottom: 22px;
+}
+
+.card h2 {
+  font-size: 19px;
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  margin-bottom: 9px;
+  color: #dce1f2;
+  font-size: 14px;
+}
+
+input, select {
+  width: 100%;
+  padding: 15px;
+  background: #0c1327;
+  border: 1px solid #35415e;
+  border-radius: 9px;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  margin-bottom: 17px;
+}
+
+input:focus, select:focus {
+  border-color: #9382ff;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  background: #7563ed;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:active {
+  opacity: 0.8;
+}
+
+.secondary {
+  background: #283451;
+  margin-top: 12px;
+}
+
+#preview {
+  display: none;
+  margin-top: 20px;
+}
+
+iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+  border-radius: 10px;
+}
+
+#message {
+  color: #a99cff;
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.feature {
+  background: #151d33;
+  padding: 17px;
+  border: 1px solid #293553;
+  border-radius: 12px;
+}
+
+.feature h3 {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.feature p {
+  color: #aab2c8;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+footer {
+  text-align: center;
+  color: #78839e;
+  padding: 30px 10px;
+  font-size: 13px;
+}
+
+@media(max-width: 450px) {
+  .hero h1 {
+    font-size: 27px;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Viral<span>Cut</span> AI ✨</div>
+  <div class="tag">BETA VERSION</div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h1>Turn Videos Into <span>Viral Clips</span></h1>
+    <p>
+      Transform long videos into engaging short-form content.
+      Your AI video clipping studio starts here.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>🎬 Create Your Clips</h2>
+
+    <label>YouTube Video URL</label>
+    <input
+      type="url"
+      id="videoUrl"
+      placeholder="Paste YouTube video link here..."
+    >
+
+    <label>Clip Duration</label>
+    <select id="duration">
+      <option value="30">30 Seconds</option>
+      <option value="45">45 Seconds</option>
+      <option value="60" selected>60 Seconds</option>
+      <option value="90">90 Seconds</option>
+    </select>
+
+    <button onclick="previewVideo()">
+      ▶ Preview Video
+    </button>
+
+    <div id="preview">
+      <h3 style="margin:20px 0 12px">Video Preview</h3>
+      <iframe id="player"
+        allowfullscreen
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+      </iframe>
+    </div>
+
+    <p id="message">
+      Paste a YouTube link to preview your video.
+    </p>
+
+    <button class="secondary" onclick="generateClips()">
+      ✨ Generate Viral Clips
+    </button>
+  </section>
+
+  <section class="card">
+    <h2>🚀 How It Works</h2>
+    <div class="features">
+
+      <div class="feature">
+        <h3>📹 1. Add Video</h3>
+        <p>Paste your YouTube video link.</p>
+      </div>
+
+      <div class="feature">
+        <h3>🤖 2. AI Analysis</h3>
+        <p>AI will identify interesting moments.</p>
+      </div>
+
+      <div class="feature">
+        <h3>✂️ 3. Create Clips</h3>
+        <p>Turn long videos into short clips.</p>
+      </div>
+
+      <div class="feature">
+        <h3>📱 4. Share</h3>
+        <p>Prepare clips for Shorts and Reels.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Viral Cut AI © 2026 | Built with AI
+</footer>
+
+<script>
+function getVideoId(url) {
+  try {
+    const parsed = new URL(url);
+    let id = "";
+
+    if (parsed.hostname === "youtu.be") {
+      id = parsed.pathname.slice(1).split("/")[0];
+    } else if (
+      parsed.hostname.includes("youtube.com") ||
+      parsed.hostname.includes("youtube-nocookie.com")
+    ) {
+      if (parsed.pathname === "/watch") {
+        id = parsed.searchParams.get("v");
+      } else {
+        const parts = parsed.pathname.split("/");
+        if (["shorts", "embed", "live"].includes(parts[1])) {
+          id = parts[2];
+        }
+      }
+    }
+
+    return id && /^[a-zA-Z0-9_-]{11}$/.test(id)
+      ? id : null;
+
+  } catch (error) {
+    return null;
+  }
+}
+
+function previewVideo() {
+  const url = document.getElementById("videoUrl").value.trim();
+  const id = getVideoId(url);
+  const message = document.getElementById("message");
+  const preview = document.getElementById("preview");
+
+  if (!id) {
+    message.textContent = "Please enter a valid YouTube video link.";
+    preview.style.display = "none";
+    return;
+  }
+
+  document.getElementById("player").src =
+    "https://www.youtube-nocookie.com/embed/" + id;
+
+  preview.style.display = "block";
+  message.textContent = "Video preview loaded successfully!";
+}
+
+function generateClips() {
+  const url = document.getElementById("videoUrl").value.trim();
+  const id = getVideoId(url);
+
+  if (!id) {
+    document.getElementById("message").textContent =
+      "Please add a valid YouTube link first.";
+    return;
+  }
+
+  document.getElementById("message").textContent =
+    "Your video link is ready! The AI processing engine will be connected in our next development step.";
+}
+</script>
+
+</body>
+</html>
