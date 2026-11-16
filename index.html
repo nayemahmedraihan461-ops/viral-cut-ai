@@ -4,232 +4,291 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Viral Cut AI - Smart Clips</title>
+<title>Viral Cut AI</title>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#0b1020;color:white;font-family:Arial,sans-serif}
-header{padding:20px;border-bottom:1px solid #293553;display:flex;justify-content:space-between}
+body{
+ background:#0b1020;
+ color:white;
+ font-family:Arial,sans-serif;
+}
+header{
+ padding:20px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ border-bottom:1px solid #293553;
+}
 .logo{font-size:23px;font-weight:bold;color:#9382ff}
 .logo span{color:white}
-.tag{background:#282344;color:#b5aaff;padding:8px;border-radius:20px;font-size:11px}
-main{max-width:750px;margin:auto;padding:25px 16px}
-.hero{text-align:center;margin:15px 0 30px}
+.tag{
+ background:#282344;color:#b5aaff;
+ padding:8px;border-radius:20px;font-size:11px;
+}
+main{max-width:750px;margin:auto;padding:28px 16px}
+.hero{text-align:center;margin:20px 0 30px}
 .hero h1{font-size:30px;margin-bottom:12px}
 .hero h1 span{color:#9382ff}
-.hero p{color:#aab2c8;line-height:1.6;font-size:14px}
-.card{background:#151d33;border:1px solid #293553;border-radius:15px;padding:20px;margin-bottom:20px}
+.hero p{color:#aab2c8;line-height:1.7;font-size:14px}
+.card{
+ background:#151d33;
+ border:1px solid #293553;
+ border-radius:15px;
+ padding:20px;
+ margin-bottom:20px;
+}
 h2{font-size:19px;margin-bottom:18px}
-label{display:block;color:#dce1f2;font-size:14px;margin-bottom:8px}
-input{width:100%;padding:14px;background:#0c1327;border:1px solid #35415e;border-radius:9px;color:white;font-size:15px;margin-bottom:16px}
-button{width:100%;padding:15px;background:#7865ef;color:white;border:0;border-radius:9px;font-size:15px;font-weight:bold;margin-top:8px}
-.secondary{background:#293653}
-.green{background:#16865b}
+label{
+ display:block;
+ color:#dce1f2;
+ font-size:14px;
+ margin-bottom:9px;
+}
+input{
+ width:100%;
+ padding:15px;
+ background:#0c1327;
+ border:1px solid #35415e;
+ border-radius:9px;
+ color:white;
+ font-size:15px;
+ margin-bottom:15px;
+}
+button{
+ width:100%;
+ padding:15px;
+ background:#7865ef;
+ color:white;
+ border:0;
+ border-radius:9px;
+ font-size:15px;
+ font-weight:bold;
+ margin-top:8px;
+ cursor:pointer;
+}
+button:active{opacity:.8}
 #playerBox{display:none;margin-top:20px}
-iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:10px}
-#status{color:#b5aaff;font-size:14px;line-height:1.6;margin-top:14px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.result{background:#10182b;padding:16px;border-radius:10px;margin-top:15px}
-.result strong{color:#8ee4b5;font-size:25px}
-.note{font-size:12px;color:#aab2c8;line-height:1.6;margin-top:12px}
-.feature{background:#10182b;padding:15px;border-radius:10px;margin-bottom:10px}
-.feature p{font-size:13px;color:#aab2c8;margin-top:6px}
-footer{text-align:center;color:#8290aa;padding:25px;font-size:12px}
+iframe{
+ width:100%;
+ aspect-ratio:16/9;
+ border:0;
+ border-radius:10px;
+}
+#status,#aiStatus{
+ color:#b5aaff;
+ font-size:14px;
+ line-height:1.7;
+ margin-top:14px;
+}
+.feature{
+ background:#10182b;
+ padding:16px;
+ border-radius:10px;
+ margin-bottom:12px;
+}
+.feature h3{font-size:15px;margin-bottom:7px}
+.feature p{
+ color:#aab2c8;
+ font-size:13px;
+ line-height:1.6;
+}
+.green{background:#16865b}
+.note{
+ color:#91a0ba;
+ font-size:12px;
+ line-height:1.7;
+ margin-top:15px;
+}
+footer{
+ text-align:center;
+ color:#8290aa;
+ padding:25px;
+ font-size:12px;
+}
 </style>
 </head>
+
 <body>
 
 <header>
  <div class="logo">Viral<span>Cut</span> AI ✨</div>
- <div class="tag">SMART AI BETA</div>
+ <div class="tag">SMART AI</div>
 </header>
 
 <main>
+
 <section class="hero">
  <h1>Find Your <span>Viral Moments</span></h1>
- <p>Let AI identify complete conversations, powerful moments and engaging video segments.</p>
-</section>
-
-<section class="card">
- <h2>🎬 1. Add YouTube Video</h2>
- <label>YouTube Video URL</label>
- <input id="videoUrl" placeholder="Paste YouTube link here">
- <button onclick="loadVideo()">Load Video</button>
-
- <div id="playerBox">
-  <h3 style="margin:20px 0 12px">Video Preview</h3>
-  <iframe id="player" allowfullscreen
-   allow="autoplay; encrypted-media; picture-in-picture">
-  </iframe>
- </div>
- <p id="status">Paste a YouTube link to begin.</p>
-</section>
-
-<section class="card">
- <h2>✂️ 2. Smart Clip Selection</h2>
-
- <div class="grid">
-  <div>
-   <label>Start Time (Seconds)</label>
-   <input id="start" type="number" min="0" value="0">
-  </div>
-  <div>
-   <label>End Time (Seconds)</label>
-   <input id="end" type="number" min="1" value="32">
-  </div>
- </div>
-
- <button onclick="previewClip()">▶ Preview Exact Segment</button>
-
- <div class="result">
-  <p style="color:#aab2c8;margin-bottom:8px">Selected Clip Duration</p>
-  <strong id="duration">32 Seconds</strong>
- </div>
-
- <button class="secondary" onclick="shareTimestamp()">🔗 Share Video Segment</button>
-
- <p class="note">
-  No fixed duration limit in our selection interface.
-  A 32-second moment remains 32 seconds, a 47-second
-  moment remains 47 seconds.
+ <p>
+ Transform long videos into engaging short clips.
+ Let AI discover the moments worth watching.
  </p>
 </section>
 
 <section class="card">
- <h2>🤖 3. AI Smart Detection</h2>
- <div class="feature">
-  <strong>🧠 Complete Sentence Detection</strong>
-  <p>AI will aim to identify the beginning and end of a complete thought.</p>
+ <h2>🎬 YouTube Video</h2>
+
+ <label>Paste YouTube Video Link</label>
+
+ <input
+  type="url"
+  id="videoUrl"
+  placeholder="https://www.youtube.com/watch?v=..."
+ >
+
+ <button onclick="loadVideo()">
+ ▶ Load Video
+ </button>
+
+ <div id="playerBox">
+  <h3 style="margin:20px 0 12px">
+   Video Preview
+  </h3>
+
+  <iframe
+   id="player"
+   allowfullscreen
+   allow="autoplay; encrypted-media; picture-in-picture">
+  </iframe>
  </div>
+
+ <p id="status">
+ Paste a YouTube link to get started.
+ </p>
+</section>
+
+<section class="card">
+ <h2>🤖 AI Smart Detection</h2>
+
  <div class="feature">
-  <strong>🔥 Viral Moment Detection</strong>
-  <p>Find engaging, interesting and meaningful moments.</p>
+  <h3>🧠 Complete Sentence Detection</h3>
+  <p>
+   Identify meaningful conversations without
+   cutting important words.
+  </p>
  </div>
+
  <div class="feature">
-  <strong>⏱️ Variable Duration</strong>
-  <p>Clip length depends on the detected moment, not a fixed timer.</p>
+  <h3>🔥 Viral Moment Detection</h3>
+  <p>
+   Find interesting, emotional and engaging
+   moments in videos.
+  </p>
  </div>
- <button class="green" onclick="aiMessage()">✨ Analyze Video with AI</button>
- <p id="aiStatus" class="note">
-  AI analysis engine is not connected yet.
+
+ <div class="feature">
+  <h3>⏱️ Automatic Duration</h3>
+  <p>
+   Every clip gets its own natural duration.
+   32 seconds means 32 seconds.
+  </p>
+ </div>
+
+ <div class="feature">
+  <h3>🎞️ Multiple Clip Suggestions</h3>
+  <p>
+   Discover multiple interesting moments
+   from one video.
+  </p>
+ </div>
+
+ <button class="green" onclick="analyzeVideo()">
+ ✨ Analyze Video with AI
+ </button>
+
+ <p id="aiStatus">
+ AI processing engine is not connected yet.
+ </p>
+
+ <p class="note">
+ Automatic AI analysis will be enabled after
+ connecting the authorized transcript and AI backend.
  </p>
 </section>
 
 </main>
 
-<footer>Viral Cut AI © 2026</footer>
+<footer>
+ Viral Cut AI © 2026<br>
+ Your Smart Video Studio
+</footer>
 
 <script>
-let videoId = null;
-let watchUrl = null;
+
+let videoId=null;
 
 function getVideoId(value){
  try{
-  const u = new URL(value);
-  const host = u.hostname.replace(/^www\./,"");
-  let id = "";
+  const u=new URL(value);
+  const host=u.hostname.replace(/^www\./,"");
+  let id="";
 
-  if(host === "youtu.be"){
-   id = u.pathname.split("/")[1];
-  }else if(
-   ["youtube.com","m.youtube.com","youtube-nocookie.com"].includes(host)
-  ){
-   if(u.pathname === "/watch"){
-    id = u.searchParams.get("v");
-   }else{
-    const p = u.pathname.split("/");
-    if(["embed","shorts","live"].includes(p[1])) id=p[2];
+  if(host==="youtu.be"){
+   id=u.pathname.split("/")[1];
+  }
+  else if([
+   "youtube.com",
+   "m.youtube.com",
+   "youtube-nocookie.com"
+  ].includes(host)){
+   if(u.pathname==="/watch"){
+    id=u.searchParams.get("v");
+   }
+   else{
+    const p=u.pathname.split("/");
+    if(["embed","shorts","live"].includes(p[1])){
+     id=p[2];
+    }
    }
   }
 
-  return id && /^[a-zA-Z0-9_-]{11}$/.test(id) ? id : null;
- }catch(e){return null}
+  return id && /^[a-zA-Z0-9_-]{11}$/.test(id)
+   ? id:null;
+
+ }catch(e){
+  return null;
+ }
 }
 
 function loadVideo(){
- const value=document.getElementById("videoUrl").value.trim();
- const id=getVideoId(value);
+
+ const url=document.getElementById("videoUrl").value.trim();
+ const id=getVideoId(url);
 
  if(!id){
-  document.getElementById("status").textContent="Please enter a valid YouTube URL.";
+  document.getElementById("status").textContent=
+  "Please enter a valid YouTube video link.";
+  document.getElementById("playerBox").style.display="none";
+  videoId=null;
   return;
  }
 
  videoId=id;
- watchUrl="https://www.youtube.com/watch?v="+id;
 
  document.getElementById("player").src=
- "https://www.youtube-nocookie.com/embed/"+id+"?playsinline=1";
+ "https://www.youtube-nocookie.com/embed/"+id+
+ "?playsinline=1&rel=0";
 
  document.getElementById("playerBox").style.display="block";
- document.getElementById("status").textContent="Video loaded. Select your desired segment.";
-}
 
-function getTimes(){
- const start=Number(document.getElementById("start").value);
- const end=Number(document.getElementById("end").value);
-
- if(!videoId){
-  document.getElementById("status").textContent="Load a video first.";
-  return null;
- }
-
- if(!Number.isInteger(start)||!Number.isInteger(end)||start<0||end<=start){
-  document.getElementById("status").textContent="End time must be greater than start time.";
-  return null;
- }
-
- return {start,end,duration:end-start};
-}
-
-function previewClip(){
- const t=getTimes();
- if(!t)return;
-
- document.getElementById("duration").textContent=
- t.duration+" Seconds";
-
- document.getElementById("player").src=
- "https://www.youtube-nocookie.com/embed/"+videoId+
- "?start="+t.start+"&end="+t.end+"&playsinline=1";
-
- document.getElementById("playerBox").style.display="block";
  document.getElementById("status").textContent=
- "Preview segment: "+t.start+"s to "+t.end+"s. Press Play.";
+ "Video loaded successfully! You can preview your video.";
 }
 
-function shareTimestamp(){
- const t=getTimes();
- if(!t)return;
+function analyzeVideo(){
 
- const url=watchUrl+"&t="+t.start+"s";
- if(navigator.share){
-  navigator.share({title:"My Video Segment",url:url});
- }else{
-  window.open(url,"_blank");
- }
-}
-
-function aiMessage(){
  if(!videoId){
-  document.getElementById("aiStatus").textContent="Load a YouTube video first.";
+  document.getElementById("aiStatus").textContent=
+  "Please load a YouTube video first.";
   return;
  }
 
  document.getElementById("aiStatus").textContent=
- "Your video is ready for AI analysis. Next we need to connect a transcript and AI processing service. Automatic detection is not active yet.";
+ "Video link verified! The AI analysis engine still needs to be connected. No clips have been generated yet.";
 }
 
-document.getElementById("start").addEventListener("input",updateDuration);
-document.getElementById("end").addEventListener("input",updateDuration);
-
-function updateDuration(){
- const start=Number(document.getElementById("start").value);
- const end=Number(document.getElementById("end").value);
-
- document.getElementById("duration").textContent=
- Number.isInteger(start)&&Number.isInteger(end)&&start>=0&&end>start
- ? (end-start)+" Seconds":"Invalid Selection";
-}
 </script>
+
 </body>
 </html>
